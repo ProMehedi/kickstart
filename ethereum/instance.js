@@ -3,7 +3,7 @@ import Factory from './abis/Factory.json'
 
 const factoryInstance = new web3.eth.Contract(
   JSON.parse(Factory.interface),
-  '0x486BD3f3De6200794426bfF401cDd4810aC31531'
+  '0x16288c9c1EF6ceacA1A1D0d308Ce3b90EF59ffCF'
 )
 
 export { factoryInstance }
