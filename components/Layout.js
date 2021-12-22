@@ -1,18 +1,15 @@
 import { Container, Grid } from 'semantic-ui-react'
 import Header from './Header'
 
-const Layout = ({ children, title }) => {
+const Layout = ({ children }) => {
   return (
     <>
       <Header />
-      <Container>
+      <Container text>
         <Grid centered>
           <Grid.Row>
-            <Grid.Column width={10}>
-              <div style={{ padding: '40px 0' }}>
-                <h2>{title}</h2>
-                {children}
-              </div>
+            <Grid.Column>
+              <div style={{ padding: '40px 0' }}>{children}</div>
             </Grid.Column>
           </Grid.Row>
         </Grid>

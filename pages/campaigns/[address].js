@@ -1,3 +1,4 @@
+import { Card } from 'semantic-ui-react'
 import { Layout } from '../../components'
 import { campaignInstance } from '../../ethereum'
 
@@ -5,7 +6,16 @@ const Campaigns = ({ campaign }) => {
   console.log(campaign)
   return (
     <Layout title='Single Campaing'>
-      <h1>Campaings</h1>
+      <Card fluid>
+        <Card.Content>
+          <Card.Header>{campaign.manager}</Card.Header>
+          <Card.Meta>Address of Manager</Card.Meta>
+          <Card.Description>
+            The manager cretaed this campaign and can create requests to
+            withdraw money.
+          </Card.Description>
+        </Card.Content>
+      </Card>
     </Layout>
   )
 }

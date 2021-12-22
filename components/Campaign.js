@@ -6,9 +6,10 @@ const Campaign = ({ data }) => {
     <Card fluid>
       <Card.Content>
         <Card.Header>{data}</Card.Header>
-        <Card.Meta>Co-Worker</Card.Meta>
+        <Card.Meta>Address of Manager</Card.Meta>
         <Card.Description>
-          Matthew is a pianist living in Nashville.
+          The manager cretaed this campaign and can create requests to withdraw
+          money.
         </Card.Description>
       </Card.Content>
       <Card.Content>
