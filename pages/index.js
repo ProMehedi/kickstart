@@ -14,8 +14,7 @@ const Home = ({ campaigns }) => {
 export default Home
 
 export const getServerSideProps = async () => {
-  const factory = factoryInstance(process.env.CONTRACT_ADDRESS)
-  const campaigns = await factory.methods.getDeployedCampaigns().call()
+  const campaigns = await factoryInstance.methods.getDeployedCampaigns().call()
 
   return {
     props: {

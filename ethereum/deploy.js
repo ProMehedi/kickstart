@@ -1,10 +1,10 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider')
 const Web3 = require('web3')
-const compiledFactory = require('../ethereum/build/Factory.json')
+const compiledFactory = require('../ethereum/abis/Factory.json')
 
 const provider = new HDWalletProvider(
-  'view jeans chuckle fuel thing middle gift shallow private nose reject garbage',
-  'https://rinkeby.infura.io/v3/f23ddff1bbda4af3a4e09b48474d058b'
+  'brain grain actress clip slim lab quick connect modify demand cook always',
+  'https://rinkeby.infura.io/v3/614a14a6d4e04d8ca53d19558ac779f2'
 )
 
 const web3 = new Web3(provider)

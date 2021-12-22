@@ -9,8 +9,10 @@ const Layout = ({ children, title }) => {
         <Grid centered>
           <Grid.Row>
             <Grid.Column width={10}>
-              <h2>{title}</h2>
-              {children}
+              <div style={{ padding: '40px 0' }}>
+                <h2>{title}</h2>
+                {children}
+              </div>
             </Grid.Column>
           </Grid.Row>
         </Grid>

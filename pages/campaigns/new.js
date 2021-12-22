@@ -2,12 +2,11 @@ import { CampaignForm, Layout } from '../../components'
 import { factoryInstance, web3 } from '../../ethereum'
 
 const NewCampaign = () => {
-  const createCampaign = async (values) => {
+  const createCampaign = async (minContribute) => {
     const accounts = await web3.eth.getAccounts()
-    await factoryInstance.methods.createCampaign(values.contribute).send({
+    await factoryInstance.methods.createCampaign(minContribute).send({
       from: accounts[0],
     })
-    console.log(values)
   }
 
   return (

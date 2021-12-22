@@ -2,14 +2,10 @@ import React from 'react'
 import { Button, Form, Icon } from 'semantic-ui-react'
 
 const CampaignForm = ({ onSubmit }) => {
-  const [contribute, setContribute] = React.useState(0)
-
-  const values = {
-    contribute,
-  }
+  const [contribute, setContribute] = React.useState('')
 
   return (
-    <Form onSubmit={() => onSubmit(values)}>
+    <Form onSubmit={() => onSubmit(contribute)}>
       <Form.Group widths='equal'>
         <Form.Field
           control='input'
