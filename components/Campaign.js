@@ -12,7 +12,7 @@ const Campaign = ({ data }) => {
         </Card.Description>
       </Card.Content>
       <Card.Content>
-        <Link href='/campaigns' passHref>
+        <Link href={`/campaigns/${data}`} passHref>
           <Button basic icon labelPosition='right' color='green'>
             View Campaign
             <Icon name='right arrow' />
