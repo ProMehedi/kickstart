@@ -14,8 +14,14 @@ export default Campaigns
 
 export const getServerSideProps = async ({ query }) => {
   const Campaign = campaignInstance(query.address)
-  const campaign = await Campaign.methods.getSummary().call()
-  console.log(campaign)
+  const campaignData = await Campaign.methods.getSummary().call()
+  const campaign = {
+    minContribute: campaignData[0],
+    balance: campaignData[1],
+    requestsCount: campaignData[2],
+    approversCount: campaignData[3],
+    manager: campaignData[4],
+  }
 
   return {
     props: {
