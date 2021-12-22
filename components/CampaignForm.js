@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Form, Icon } from 'semantic-ui-react'
 
-const CampaignForm = ({ onSubmit }) => {
+const CampaignForm = ({ onSubmit, loading }) => {
   const [contribute, setContribute] = React.useState('')
 
   return (
@@ -14,7 +14,14 @@ const CampaignForm = ({ onSubmit }) => {
           onChange={(e) => setContribute(e.target.value)}
         />
         <Form.Field style={{ width: 'auto' }}>
-          <Button icon labelPosition='right' color='green' type='submit'>
+          <Button
+            icon
+            labelPosition='right'
+            color='green'
+            type='submit'
+            loading={loading}
+            disabled={loading}
+          >
             Create
             <Icon name='plus' />
           </Button>

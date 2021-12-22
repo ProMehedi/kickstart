@@ -5,21 +5,25 @@ import { factoryInstance, web3 } from '../../ethereum'
 
 const NewCampaign = () => {
   const [error, setError] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
 
   const createCampaign = async (minContribute) => {
     try {
+      setLoading(true)
       const accounts = await web3.eth.getAccounts()
       await factoryInstance.methods.createCampaign(minContribute).send({
         from: accounts[0],
       })
+      setLoading(false)
     } catch (err) {
       setError(err.message)
+      setLoading(false)
     }
   }
 
   return (
     <Layout title='Create new Campaings'>
-      <CampaignForm onSubmit={createCampaign} />
+      <CampaignForm onSubmit={createCampaign} loading={loading} />
       {error && (
         <Message negative>
           <Message.Header>
