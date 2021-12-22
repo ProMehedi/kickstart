@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { Icon, Message } from 'semantic-ui-react'
 import { CampaignForm, Layout } from '../../components'
 import { factoryInstance, web3 } from '../../ethereum'
@@ -6,6 +7,8 @@ import { factoryInstance, web3 } from '../../ethereum'
 const NewCampaign = () => {
   const [error, setError] = React.useState('')
   const [loading, setLoading] = React.useState(false)
+
+  const router = useRouter()
 
   const createCampaign = async (minContribute) => {
     try {
@@ -15,6 +18,9 @@ const NewCampaign = () => {
         from: accounts[0],
       })
       setLoading(false)
+
+      // NextJs Back to homepage
+      router.push('/')
     } catch (err) {
       setError(err.message)
       setLoading(false)
