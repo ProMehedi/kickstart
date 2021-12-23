@@ -64,6 +64,11 @@ const Requests = ({ address, requests, approvers }) => {
                   labelPosition='right'
                   size='small'
                   color='green'
+                  disabled={
+                    request.approvalCount > 0 ||
+                    (approveLoading && request.id === id)
+                  }
+                  loading={approveLoading && request.id === id}
                   onClick={() => onApprove(request.id)}
                 >
                   <Icon name='checkmark' />
@@ -77,6 +82,12 @@ const Requests = ({ address, requests, approvers }) => {
                   labelPosition='right'
                   size='small'
                   color='red'
+                  disabled={
+                    request.approvalCount !== approvers ||
+                    (completeLoading && request.id === id)
+                  }
+                  loading={completeLoading && request.id === id}
+                  // onClick={() => onFinalize(request.id)}
                 >
                   <Icon name='x' />
                   Finalize
