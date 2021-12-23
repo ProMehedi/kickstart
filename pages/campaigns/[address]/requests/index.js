@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { Button, Icon, Table } from 'semantic-ui-react'
+import { Button, Grid, Icon, Table } from 'semantic-ui-react'
 import { InfoMessage, Layout } from '../../../../components'
 import { campaignInstance, web3 } from '../../../../ethereum'
 
@@ -119,19 +119,38 @@ const Requests = ({ address, requests, approvers }) => {
         </Table.Body>
       </Table>
       {error && <InfoMessage message={error} />}
-      <Link href={`/campaigns/${address}/requests/new`} passHref>
-        <Button
-          basic
-          icon
-          labelPosition='right'
-          color='blue'
-          size='large'
-          style={{ marginTop: 30 }}
-        >
-          Create New Request
-          <Icon name='plus' />
-        </Button>
-      </Link>
+      <Grid>
+        <Grid.Column width={8}>
+          <Link href={`/campaigns/${address}/requests/new`} passHref>
+            <Button
+              basic
+              icon
+              labelPosition='right'
+              color='green'
+              size='large'
+              style={{ marginTop: 30 }}
+            >
+              Create New Request
+              <Icon name='plus' />
+            </Button>
+          </Link>
+        </Grid.Column>
+        <Grid.Column width={8} style={{ textAlign: 'right' }}>
+          <Link href={`/campaigns/${address}/requests`} passHref>
+            <Button
+              basic
+              icon
+              labelPosition='right'
+              color='blue'
+              size='large'
+              style={{ marginTop: 30 }}
+            >
+              Back to Requests
+              <Icon name='plus' />
+            </Button>
+          </Link>
+        </Grid.Column>
+      </Grid>
     </Layout>
   )
 }
