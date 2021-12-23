@@ -90,4 +90,15 @@ contract Campaign {
   function getRequestsCount() public view returns (uint) {
     return request.length;
   }
+
+  function getRequest(uint _requestId) public view returns (string memory, uint, address, bool, uint) {
+    Request storage newReq = request[_requestId];
+    return (
+      newReq.description,
+      newReq.value,
+      newReq.recipient,
+      newReq.complete,
+      newReq.approvalCount
+    );
+  }
 }
