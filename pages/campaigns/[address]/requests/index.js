@@ -30,6 +30,24 @@ const Requests = ({ address, requests, approvers }) => {
       setApproveLoading(false)
     }
   }
+
+  const onFinalize = async (id) => {
+    setId(id)
+    try {
+      setCompleteLoading(true)
+      const accounts = await web3.eth.getAccounts()
+      await campaignInstance(address).methods.finalizeRequest(id).send({
+        from: accounts[0],
+      })
+      // Re-render the page
+      router.replace(router.asPath)
+
+      setCompleteLoading(false)
+    } catch (err) {
+      setError(err.message)
+      setCompleteLoading(false)
+    }
+  }
   return (
     <Layout>
       <h1>List of Requests</h1>
@@ -87,7 +105,7 @@ const Requests = ({ address, requests, approvers }) => {
                     (completeLoading && request.id === id)
                   }
                   loading={completeLoading && request.id === id}
-                  // onClick={() => onFinalize(request.id)}
+                  onClick={() => onFinalize(request.id)}
                 >
                   <Icon name='x' />
                   Finalize
