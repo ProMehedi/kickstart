@@ -54,7 +54,7 @@ const Requests = ({ address, requests, approvers }) => {
   return (
     <Layout>
       <h1>List of Requests</h1>
-      <Table celled>
+      <Table celled size='small'>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>ID</Table.HeaderCell>

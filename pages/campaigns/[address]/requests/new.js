@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { Button, Icon } from 'semantic-ui-react'
 import { InfoMessage, Layout, RequestForm } from '../../../../components'
@@ -7,6 +8,8 @@ import { campaignInstance, web3 } from '../../../../ethereum'
 const NewRequests = ({ address }) => {
   const [error, setError] = React.useState('')
   const [loading, setLoading] = React.useState(false)
+
+  const router = useRouter()
 
   const makeRequest = async (request) => {
     const { description, value, recipient } = request
@@ -24,6 +27,9 @@ const NewRequests = ({ address }) => {
         })
       setLoading(false)
       setError('')
+
+      // Back to Requests page
+      router.push(`/campaigns/${address}/requests`)
     } catch (err) {
       setError(err.message)
       setLoading(false)
@@ -32,7 +38,7 @@ const NewRequests = ({ address }) => {
 
   return (
     <Layout>
-      <h1>Requests!</h1>
+      <h1>Create new Request</h1>
       <RequestForm onSubmit={makeRequest} loading={loading} />
       {error && <InfoMessage error={error} />}
       <Link href={`/campaigns/${address}/requests`} passHref>

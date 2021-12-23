@@ -29,6 +29,7 @@ const NewCampaign = () => {
 
   return (
     <Layout title='Create new Campaings'>
+      <h1>Create New Campaign</h1>
       <CampaignForm onSubmit={createCampaign} loading={loading} />
       {error && (
         <Message negative>

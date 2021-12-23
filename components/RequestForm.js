@@ -49,7 +49,7 @@ const RequestForm = ({ onSubmit, loading }) => {
           loading={loading}
           disabled={loading}
         >
-          Contribute
+          Create Request
           <Icon name='plus' />
         </Button>
       </Form.Field>
