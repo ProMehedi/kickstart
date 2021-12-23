@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { Button, Icon, Table } from 'semantic-ui-react'
-import { Layout } from '../../../../components'
+import { InfoMessage, Layout } from '../../../../components'
 import { campaignInstance, web3 } from '../../../../ethereum'
 
 const Requests = ({ address, requests, approvers }) => {
@@ -118,6 +118,7 @@ const Requests = ({ address, requests, approvers }) => {
           ))}
         </Table.Body>
       </Table>
+      {error && <InfoMessage message={error} />}
       <Link href={`/campaigns/${address}/requests/new`} passHref>
         <Button
           basic
