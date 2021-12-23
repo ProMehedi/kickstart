@@ -1,11 +1,11 @@
 import { Container, Grid } from 'semantic-ui-react'
 import Header from './Header'
 
-const Layout = ({ children }) => {
+const Layout = ({ children, wider = false }) => {
   return (
     <>
       <Header />
-      <Container text>
+      <Container text={!wider}>
         <Grid centered>
           <Grid.Row>
             <Grid.Column>

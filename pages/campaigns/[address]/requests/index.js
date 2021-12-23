@@ -52,7 +52,7 @@ const Requests = ({ address, requests, approvers }) => {
   }
 
   return (
-    <Layout>
+    <Layout wider={true}>
       <h1>List of Requests</h1>
       <Table celled size='small'>
         <Table.Header>
