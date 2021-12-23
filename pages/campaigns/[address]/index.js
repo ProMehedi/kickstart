@@ -1,6 +1,7 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
-import { Card } from 'semantic-ui-react'
+import { Button, Card, Icon } from 'semantic-ui-react'
 import { ContributeForm, InfoMessage, Layout } from '../../../components'
 import { campaignInstance, web3 } from '../../../ethereum'
 
@@ -93,6 +94,19 @@ const Campaign = ({ campaign }) => {
           </Card.Content>
         </Card>
       </Card.Group>
+      <Link href={`/campaigns/${campaign.address}/requests`} passHref>
+        <Button
+          basic
+          icon
+          labelPosition='right'
+          size='large'
+          color='green'
+          style={{ marginTop: 30 }}
+        >
+          View Requests
+          <Icon name='right arrow' />
+        </Button>
+      </Link>
     </Layout>
   )
 }
