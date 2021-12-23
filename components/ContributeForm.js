@@ -7,12 +7,14 @@ const ContributeForm = ({ onSubmit, loading }) => {
   return (
     <Form onSubmit={() => onSubmit(contribute)}>
       <Form.Group widths='equal'>
-        <Form.Field
-          control='input'
-          type='number'
-          placeholder='Amount (Ether)'
-          onChange={(e) => setContribute(e.target.value)}
-        />
+        <Form.Field>
+          <input
+            type='number'
+            placeholder='Amount (Ether)'
+            step='any'
+            onChange={(e) => setContribute(e.target.value)}
+          />
+        </Form.Field>
         <Form.Field style={{ width: 'auto' }}>
           <Button
             icon

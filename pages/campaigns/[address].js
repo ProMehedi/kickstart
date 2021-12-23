@@ -1,8 +1,34 @@
+import { useRouter } from 'next/router'
+import React from 'react'
 import { Card } from 'semantic-ui-react'
 import { ContributeForm, Layout } from '../../components'
-import { campaignInstance } from '../../ethereum'
+import { campaignInstance, web3 } from '../../ethereum'
 
 const Campaign = ({ campaign }) => {
+  const [error, setError] = React.useState('')
+  const [loading, setLoading] = React.useState(false)
+
+  const router = useRouter()
+
+  const contribute = async (value) => {
+    try {
+      setLoading(true)
+      const accounts = await web3.eth.getAccounts()
+      await campaignInstance(campaign.address)
+        .methods.contribute()
+        .send({
+          from: accounts[0],
+          value: web3.utils.toWei(value, 'ether'),
+        })
+      setLoading(false)
+      // Re-render the page
+      router.replace(router.asPath)
+    } catch (err) {
+      setError(err.message)
+      setLoading(false)
+    }
+  }
+
   return (
     <Layout title='Single Campaing'>
       <Card.Group itemsPerRow={2}>
@@ -60,7 +86,8 @@ const Campaign = ({ campaign }) => {
             <Card.Header>Contribute</Card.Header>
             <Card.Meta>Amount to Contribute</Card.Meta>
             <Card.Description>
-              <ContributeForm />
+              <ContributeForm onSubmit={contribute} loading={loading} />
+              <h4>{error}</h4>
             </Card.Description>
           </Card.Content>
         </Card>
@@ -80,6 +107,7 @@ export const getServerSideProps = async ({ query }) => {
     requestsCount: campaignData[2],
     approversCount: campaignData[3],
     manager: campaignData[4],
+    address: query.address,
   }
 
   return {
