@@ -1,5 +1,5 @@
 import { Card } from 'semantic-ui-react'
-import { Layout } from '../../components'
+import { ContributeForm, Layout } from '../../components'
 import { campaignInstance } from '../../ethereum'
 
 const Campaign = ({ campaign }) => {
@@ -52,6 +52,15 @@ const Campaign = ({ campaign }) => {
             <Card.Meta>Campaign Balance</Card.Meta>
             <Card.Description>
               The balance is how much money this campaign has left to spend.
+            </Card.Description>
+          </Card.Content>
+        </Card>
+        <Card fluid>
+          <Card.Content>
+            <Card.Header>Contribute</Card.Header>
+            <Card.Meta>Amount to Contribute</Card.Meta>
+            <Card.Description>
+              <ContributeForm />
             </Card.Description>
           </Card.Content>
         </Card>
