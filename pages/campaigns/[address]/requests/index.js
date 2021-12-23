@@ -8,11 +8,12 @@ import { campaignInstance, web3 } from '../../../../ethereum'
 const Requests = ({ address, requests, approvers }) => {
   const [error, setError] = React.useState('')
   const [approveLoading, setApproveLoading] = React.useState(false)
-  const [completeLoading, setCompleteLoading] = React.useState(false)
+  const [finalizeLoading, setFinalizeLoading] = React.useState(false)
   const [id, setId] = React.useState(null)
 
   const router = useRouter()
 
+  // Approve a request
   const onApprove = async (id) => {
     setId(id)
     try {
@@ -31,10 +32,11 @@ const Requests = ({ address, requests, approvers }) => {
     }
   }
 
+  // Finalize a request
   const onFinalize = async (id) => {
     setId(id)
     try {
-      setCompleteLoading(true)
+      setFinalizeLoading(true)
       const accounts = await web3.eth.getAccounts()
       await campaignInstance(address).methods.finalizeRequest(id).send({
         from: accounts[0],
@@ -42,12 +44,13 @@ const Requests = ({ address, requests, approvers }) => {
       // Re-render the page
       router.replace(router.asPath)
 
-      setCompleteLoading(false)
+      setFinalizeLoading(false)
     } catch (err) {
       setError(err.message)
-      setCompleteLoading(false)
+      setFinalizeLoading(false)
     }
   }
+
   return (
     <Layout>
       <h1>List of Requests</h1>
@@ -95,19 +98,19 @@ const Requests = ({ address, requests, approvers }) => {
               </Table.Cell>
               <Table.Cell>
                 <Button
-                  basic
                   icon
                   labelPosition='right'
                   size='small'
-                  color='red'
+                  color='green'
                   disabled={
                     request.approvalCount !== approvers ||
-                    (completeLoading && request.id === id)
+                    (finalizeLoading && request.id === id) ||
+                    request.complete
                   }
-                  loading={completeLoading && request.id === id}
+                  loading={finalizeLoading && request.id === id}
                   onClick={() => onFinalize(request.id)}
                 >
-                  <Icon name='x' />
+                  <Icon name='check circle' />
                   Finalize
                 </Button>
               </Table.Cell>
