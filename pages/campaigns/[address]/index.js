@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import { Card } from 'semantic-ui-react'
-import { ContributeForm, InfoMessage, Layout } from '../../components'
-import { campaignInstance, web3 } from '../../ethereum'
+import { ContributeForm, InfoMessage, Layout } from '../../../components'
+import { campaignInstance, web3 } from '../../../ethereum'
 
 const Campaign = ({ campaign }) => {
   const [error, setError] = React.useState('')
