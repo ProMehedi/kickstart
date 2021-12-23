@@ -1,11 +1,35 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React from 'react'
 import { Button, Icon, Table } from 'semantic-ui-react'
 import { Layout } from '../../../../components'
 import { campaignInstance, web3 } from '../../../../ethereum'
 
 const Requests = ({ address, requests, approvers }) => {
-  console.log(approvers)
+  const [error, setError] = React.useState('')
+  const [approveLoading, setApproveLoading] = React.useState(false)
+  const [completeLoading, setCompleteLoading] = React.useState(false)
+  const [id, setId] = React.useState(null)
+
+  const router = useRouter()
+
+  const onApprove = async (id) => {
+    setId(id)
+    try {
+      setApproveLoading(true)
+      const accounts = await web3.eth.getAccounts()
+      await campaignInstance(address).methods.approveRequest(id).send({
+        from: accounts[0],
+      })
+      // Re-render the page
+      router.replace(router.asPath)
+
+      setApproveLoading(false)
+    } catch (err) {
+      setError(err.message)
+      setApproveLoading(false)
+    }
+  }
   return (
     <Layout>
       <h1>List of Requests</h1>
@@ -40,7 +64,7 @@ const Requests = ({ address, requests, approvers }) => {
                   labelPosition='right'
                   size='small'
                   color='green'
-                  disabled={request.approvalCount > 0}
+                  onClick={() => onApprove(request.id)}
                 >
                   <Icon name='checkmark' />
                   Approve
