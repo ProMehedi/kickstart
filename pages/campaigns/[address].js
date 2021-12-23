@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import { Card } from 'semantic-ui-react'
-import { ContributeForm, Layout } from '../../components'
+import { ContributeForm, InfoMessage, Layout } from '../../components'
 import { campaignInstance, web3 } from '../../ethereum'
 
 const Campaign = ({ campaign }) => {
@@ -21,6 +21,7 @@ const Campaign = ({ campaign }) => {
           value: web3.utils.toWei(value, 'ether'),
         })
       setLoading(false)
+      setError('')
       // Re-render the page
       router.replace(router.asPath)
     } catch (err) {
@@ -87,7 +88,7 @@ const Campaign = ({ campaign }) => {
             <Card.Meta>Amount to Contribute</Card.Meta>
             <Card.Description>
               <ContributeForm onSubmit={contribute} loading={loading} />
-              <h4>{error}</h4>
+              {error && <InfoMessage message={error} />}
             </Card.Description>
           </Card.Content>
         </Card>
